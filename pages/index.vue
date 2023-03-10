@@ -1,3 +1,20 @@
+import AuthCard from '~~/components/auth/AuthCard.vue';
+
 <template>
-  <h1>Wellcome Notes App!</h1>
+  <div>
+    <div class="container">
+      <AuthCard />
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.container {
+  max-width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+</style>
