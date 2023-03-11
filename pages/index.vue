@@ -1,8 +1,11 @@
-import AuthCard from '~~/components/auth/AuthCard.vue';
+<script setup lang="ts">
+const { supabase } = useSupabase();
+</script>
 
 <template>
   <div>
     <div class="container">
+      {{ supabase }}
       <AuthCard />
     </div>
   </div>
