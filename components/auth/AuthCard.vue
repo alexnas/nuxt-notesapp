@@ -1,9 +1,15 @@
 <script setup lang="ts">
 const authState = ref<'login' | 'singup'>('login');
 
+const { signUp, user } = useAuth();
+
 const toggleAuthState = () => {
   if (authState.value === 'login') authState.value = 'singup';
   else authState.value = 'login';
+};
+
+const handleSubmit = () => {
+  signUp({ email: 'alexnas2python@gmail.com', password: 'password' });
 };
 </script>
 
@@ -15,7 +21,8 @@ const toggleAuthState = () => {
         <input type="text" placeholder="Email" />
         <input type="text" placeholder="Password" />
       </div>
-      <NButton>Submit</NButton>
+      {{ user }}
+      <NButton @click="handleSubmit">Submit</NButton>
       <p @click="toggleAuthState">
         {{ authState === 'login' ? "Don't have an account? Create one now" : 'Already have an account? Go ahead and log in' }}
       </p>
