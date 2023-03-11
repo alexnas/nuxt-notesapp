@@ -1,3 +1,23 @@
+<script setup lang="ts">
+const { supabase } = useSupabase();
+</script>
+
 <template>
-  <h1>Wellcome Notes App!</h1>
+  <div>
+    <div class="container">
+      {{ supabase }}
+      <AuthCard />
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.container {
+  max-width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+</style>
