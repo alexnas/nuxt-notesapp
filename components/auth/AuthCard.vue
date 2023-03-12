@@ -43,7 +43,6 @@ const handleSubmit = async () => {
         </div>
         <!-- <pre>{{ user }}</pre> -->
         <NButton @click="handleSubmit">Submit</NButton>
-        <NButton @click="signOut">Logout</NButton>
         <p class="error" v-if="authError">{{ authError }}</p>
         <p @click="toggleAuthState">
           {{ authState === 'login' ? "Don't have an account? Create one now" : 'Already have an account? Go ahead and log in' }}
