@@ -18,7 +18,10 @@ const useAuth = () => {
     const { data: user, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: metadata },
+      options: {
+        data: metadata,
+        emailRedirectTo: `${window.location.origin}/profile?source=email`,
+      },
     });
     if (error) throw error;
 
