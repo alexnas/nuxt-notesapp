@@ -3,11 +3,16 @@ const useAuth = () => {
   const { supabase } = useSupabase();
 
   supabase.auth.onAuthStateChange((e, session) => {
-    user.value = session?.user || null;
+    user.value = session?.user ? session?.user : null;
   });
 
-  const signUp = async ({ email, password, ...metadata }) => {
-    const { user: u, error } = await supabase.auth.signUp(
+  interface ISignUpProps {
+    email: string;
+    password: string;
+  }
+
+  const signUp = async ({ email, password, ...metadata }: ISignUpProps) => {
+    const { data: user, error } = await supabase.auth.signUp(
       {
         email,
         password,
@@ -16,11 +21,27 @@ const useAuth = () => {
     );
     if (error) throw error;
 
-    return u;
+    return user;
   };
+
+  interface ISignInProps {
+    email: string;
+    password: string;
+  }
+
+  const signIn = async ({ email, password }: ISignInProps) => {
+    const { data: user, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) throw error;
+    return user;
+  };
+
   return {
     user,
     signUp,
+    signIn,
   };
 };
 
