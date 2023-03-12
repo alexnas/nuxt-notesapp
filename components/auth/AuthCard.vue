@@ -5,7 +5,7 @@ const input = reactive({
   password: '',
 });
 
-const { signUp, signIn, user } = useAuth();
+const { user, signUp, signIn, signOut } = useAuth();
 
 const toggleAuthState = () => {
   if (authState.value === 'login') authState.value = 'singup';
@@ -18,6 +18,8 @@ const handleSubmit = () => {
   } else {
     signUp({ email: input.email, password: input.password });
   }
+  input.email = '';
+  input.password = '';
 };
 </script>
 
@@ -26,7 +28,6 @@ const handleSubmit = () => {
     <NCard class="card">
       <h3>{{ authState }}</h3>
       <div class="input-container">
-        {{ input.email }} ==== {{ input.password }}
         <input type="text" placeholder="Email" v-model="input.email" />
         <input type="text" placeholder="Password" v-model="input.password" />
       </div>
@@ -34,6 +35,7 @@ const handleSubmit = () => {
       {{ user }}
       </pre>
       <NButton @click="handleSubmit">Submit</NButton>
+      <NButton @click="signOut">Logout</NButton>
       <p @click="toggleAuthState">
         {{ authState === 'login' ? "Don't have an account? Create one now" : 'Already have an account? Go ahead and log in' }}
       </p>
