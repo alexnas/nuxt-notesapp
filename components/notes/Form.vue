@@ -1,8 +1,31 @@
 <script setup lang="ts">
+const { supabase } = useSupabase();
+const { user } = useAuth();
+
 const notesInput = reactive({
   title: '',
   note: '',
 });
+
+const handleSubmit = async () => {
+  if (!notesInput.title || !notesInput.note) {
+    console.log('NO DATA', notesInput.title, notesInput.note);
+    return;
+  }
+
+  console.log('POINT BEFORE NOTES DATA SAVING');
+
+  await supabase.from('notes').insert({
+    title: notesInput.title,
+    note: notesInput.note,
+    user_id: user.value?.id,
+  });
+
+  console.log('AFTER SAVE', notesInput.title, notesInput.note, user.value?.id);
+
+  notesInput.title = '';
+  notesInput.note = '';
+};
 </script>
 
 <template>
@@ -10,7 +33,7 @@ const notesInput = reactive({
     <NCard class="card">
       <input class="input" type="text" placeholder="My notes title" v-model="notesInput.title" />
       <textarea class="input" placeholder="My notes" v-model="notesInput.note" />
-      <NButton>Save Note</NButton>
+      <NButton @click="handleSubmit">Save Note</NButton>
     </NCard>
   </div>
 </template>
