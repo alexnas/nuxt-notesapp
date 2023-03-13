@@ -2,6 +2,7 @@ import { User } from '@supabase/supabase-js';
 
 const useAuth = () => {
   let user = useState<User | null>('user', () => null);
+  const router = useRouter();
   const { supabase } = useSupabase();
 
   supabase.auth.onAuthStateChange((e, session) => {
@@ -45,6 +46,11 @@ const useAuth = () => {
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
+    router.push('/');
+  };
+
+  const isLoggedIn = () => {
+    return !!user.value;
   };
 
   return {
@@ -52,6 +58,7 @@ const useAuth = () => {
     signUp,
     signIn,
     signOut,
+    isLoggedIn,
   };
 };
 
