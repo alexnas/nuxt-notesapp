@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import useAuth from '~~/composables/useAuth';
+
 const { signOut, isLoggedIn } = useAuth();
 </script>
 

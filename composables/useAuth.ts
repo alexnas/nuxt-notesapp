@@ -1,4 +1,5 @@
 import { User } from '@supabase/supabase-js';
+import useSupabase from './useSupabase';
 
 const useAuth = () => {
   let user = useState<User | null>('user', () => null);
