@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import useAuth from '~~/composables/useAuth';
+
 const authState = ref<'login' | 'singup'>('login');
 const authError = ref('');
 const showConfirmEmailMessage = ref(false);

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import useAuth from '~~/composables/useAuth';
+import useSupabase from '~~/composables/useSupabase';
+
 const { supabase } = useSupabase();
 const { user } = useAuth();
 
